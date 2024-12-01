@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideBuddy - User Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center mb-6">User Profile</h1>
+        
+        <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h2 class="text-xl font-semibold mb-4">Personal Information</h2>
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+                </div>
+                
+                <div>
+                    <h2 class="text-xl font-semibold mb-4">Eco Impact</h2>
+                    <p><strong>Total Rides:</strong> {{ eco_impact.total_rides }}</p>
+                    <p><strong>Total CO2 Saved:</strong> {{ eco_impact.total_co2_saved|floatformat:2 }} grams</p>
+                    <p><strong>Total Distance:</strong> {{ eco_impact.total_distance|floatformat:2 }} km</p>
+                    <p><strong>Preferred Vehicle:</strong> {{ eco_impact.preferred_vehicle|default:"Not determined" }}</p>
+                </div>
+            </div>
+            
+            <div class="mt-6">
+                <h2 class="text-xl font-semibold mb-4">Vehicle Breakdown</h2>
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="p-2 border">Vehicle Type</th>
+                            <th class="p-2 border">Number of Rides</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vehicle in eco_impact.vehicle_breakdown %}
+                            <tr>
+                                <td class="p-2 border">{{ vehicle.fuel_type }}</td>
+                                <td class="p-2 border text-center">{{ vehicle.count }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="text-center mt-6">
+            <a href="{% url 'record_ride' %}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                Record New Ride
+            </a>
+            <a href="{% url 'logout' %}" class="ml-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                Logout
+            </a>
+        </div>
+    </div>
+</body>
+</html>

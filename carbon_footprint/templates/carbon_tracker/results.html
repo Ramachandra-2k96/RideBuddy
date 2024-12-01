@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideBuddy - Carbon Savings Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center mb-6">Your Carbon Savings</h1>
+        <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+            <div class="space-y-4">
+                <div class="bg-green-100 p-4 rounded">
+                    <h2 class="text-xl font-semibold">This Ride's Savings</h2>
+                    <p class="text-2xl font-bold text-green-600">{{ ride.co2_savings|floatformat:2 }} grams CO2</p>
+                </div>
+                <div class="bg-blue-100 p-4 rounded">
+                    <h2 class="text-xl font-semibold">Total Lifetime Savings</h2>
+                    <p class="text-2xl font-bold text-blue-600">{{ total_savings|floatformat:2 }} grams CO2</p>
+                </div>
+                <a href="{% url 'record_ride' %}" class="block w-full text-center bg-green-500 text-white p-2 rounded hover:bg-green-600">
+                    Track Another Ride
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
